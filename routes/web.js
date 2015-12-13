@@ -1,0 +1,15 @@
+module.exports = [
+  {path: '/welcome', component: require('views/welcome')},
+  {path: '/verify/email', component: require('views/welcome')},
+  {path: '/', component: require('views/home')},
+  {path: '/tag/:id', component: require('views/home')},
+  {path: '/site/create', component: require('views/website/create')},
+  {path: '/site/:id/edit', component: require('views/website/create')},
+  {path: '/user/profile', component: require('views/settings/profile')},
+  {path: '/user/password', component: require('views/settings/password')},
+  {path: '/feedback', component: require('views/settings/feedback')},
+  {path: '/user/delete', component: require('views/settings/delete')},
+  {path: '/support', component: require('views/settings/support')},
+  {path: '/version', component: require('views/settings/version')},
+  {path: '*', component: require('views/errors/not-found')},
+]
