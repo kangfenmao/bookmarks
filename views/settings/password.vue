@@ -41,7 +41,7 @@
       }
     },
     components: {
-      'nav-menu' : require('./menu'),
+      'nav-menu' : require('./menu').default,
     },
     mounted() {
       $('#password-form').validator().on('submit', this.submit)

@@ -19,4 +19,4 @@ function sites(keywords) {
   return match_sites
 }
 
-module.exports = { sites }
+export default { sites }

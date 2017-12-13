@@ -13,8 +13,8 @@
 <script>
   export default {
     components: {
-      tags : require('./home/tags'),
-      bookmarks : require('./home/bookmarks')
+      tags : require('./home/tags').default,
+      bookmarks : require('./home/bookmarks').default
     }
   }
 </script>

@@ -18,8 +18,8 @@ Vue.http.options.root = 'http://api.shuqian.pro'
 Vue.http.options.params = {'api_token' : localStorage.getItem('token')}
 
 // register components
-Vue.component('app', require('views/app'))
-Vue.component('navigation', require('views/home/navigation'))
+Vue.component('app', require('views/app').default)
+Vue.component('navigation', require('views/home/navigation').default)
 
 // init vue-router
 window.router = new VueRouter({

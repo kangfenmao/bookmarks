@@ -59,7 +59,7 @@
       }
     },
     components: {
-      tags : require('./tags'),
+      tags : require('./tags').default,
     },
     created() {
       app.$on('select-tag', this.tagSelected)

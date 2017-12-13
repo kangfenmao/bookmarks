@@ -37,4 +37,4 @@ function logout() {
   router.push('/welcome')
 }
 
-module.exports = { guard, loggedIn, logout }
+export default { guard, loggedIn, logout }

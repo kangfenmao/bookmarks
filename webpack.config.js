@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractText = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: './bootstrap/app.js',
@@ -15,7 +15,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader options go here
+          extractCSS: true
         }
       },
       {
@@ -24,20 +24,13 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      },
-      {
         test: /\.less$/,
         loader: ['style-loader', 'css-loader', 'less-loader']
       }
     ]
   },
   plugins: [
-    new ExtractText("app.css"),
+    new ExtractTextPlugin("app.css"),
     new webpack.ProvidePlugin({
       $: "jquery/dist/jquery.slim.min",
       jQuery: "jquery/dist/jquery.slim.min",
@@ -48,11 +41,7 @@ module.exports = {
     extensions: [' ', '.js', '.vue'],
     alias: {
       App : path.join(__dirname, 'app'),
-      config : path.join(__dirname, 'config'),
-      resources : path.join(__dirname, 'resources'),
-      assets : path.join(__dirname, 'resources/assets'),
-      views : path.join(__dirname, 'resources/views'),
-      lang : path.join(__dirname, 'resources/lang'),
+      views : path.join(__dirname, 'views'),
       routes : path.join(__dirname, 'routes'),
       vue$ : 'vue/dist/vue.common.js'
     }

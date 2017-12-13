@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
         </button>
         <a href="javascript:" class="navbar-brand image" @click="goHome">
-          <img src="../../assets/images/logo-brand.png" alt="Brand"/>
+          <img src="/assets/images/logo-brand.png" alt="Brand"/>
         </a>
         <a href="javascript:" class="navbar-brand" @click="goHome">BookMarks</a>
       </div>

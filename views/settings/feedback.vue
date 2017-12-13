@@ -26,7 +26,7 @@
       }
     },
     components: {
-      'nav-menu' : require('./menu'),
+      'nav-menu' : require('./menu').default,
     },
     mounted() {
       $('#feedback-form').validator().on('submit', this.submit)

@@ -33,4 +33,4 @@ function clearCache() {
   localStorage.removeItem('sites')
 }
 
-module.exports = { all, get, remove, cache, clearCache }
+export default { all, get, remove, cache, clearCache }

@@ -59,5 +59,5 @@ function sites(tagId) {
   return result
 }
 
-module.exports = { all, get, count, remove, cache, clearCache, sites }
+export default { all, get, count, remove, cache, clearCache, sites }
 

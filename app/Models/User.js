@@ -7,4 +7,4 @@ function cache(user) {
   return user
 }
 
-module.exports = { info, cache }
+export default { info, cache }

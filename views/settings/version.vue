@@ -31,7 +31,7 @@
 <script>
   export default {
     components: {
-      'nav-menu' : require('./menu')
+      'nav-menu' : require('./menu').default
     }
   }
 </script>
