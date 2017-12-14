@@ -12,7 +12,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">登录</h4>
+            <h4 class="modal-title">登录或注册</h4>
           </div>
           <div class="modal-body">
             <form class="form-horizontal" role="form">
@@ -32,7 +32,7 @@
               </div>
               <div class="form-group">
                 <div class="col-md-9 col-md-offset-2">
-                  <button type="submit" class="btn btn-primary" id="btn-next" data-loading-text="正在处理...">下一步</button>
+                  <button type="submit" class="btn btn-primary" id="btn-next" data-loading-text="正在处理...">开始使用</button>
                   <a class="btn btn-link" href="javascript:alert('请联系 elekids@qq.com')">忘记密码？</a>
                 </div>
               </div>
