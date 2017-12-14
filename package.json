@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "sync": "rsync -rvztl --delete ~/web/bookmarks/bookmarks/public/ aliyun:/srv/web/shuqian.pro/www",
+    "sync": "rsync -rvztl --delete ./public/ aliyun:/srv/web/shuqian.pro/www",
     "upload": "npm run build && npm run sync"
   },
   "dependencies": {
