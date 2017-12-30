@@ -35,4 +35,4 @@ router.beforeEach((to, from, next) => {
 
 // run application
 window.app = new Vue({router})
-window.app.$mount('#app');
+window.app.$mount('#app')

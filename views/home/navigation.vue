@@ -21,7 +21,6 @@
         </form>
         <router-link to="/site/create" class="btn btn-add"> + </router-link>
         <div class="nav navbar-nav navbar-right">
-          <li><span class="glyphicon glyphicon-pencil" @click.stop="toggleEditMode()" title="编辑"></span></li>
           <li class="dropdown" title="设置">
             <span class="dropdown-toggle btn-setting glyphicon glyphicon-cog" data-toggle="dropdown" role="button" aria-expanded="false"></span>
             <ul class="dropdown-menu" role="menu">
@@ -45,7 +44,7 @@
   export default {
     data() {
       return {
-        'focus' : this.$route.path == '/'
+        focus : this.$route.path == '/'
       }
     },
     directives: {
@@ -73,9 +72,6 @@
       goHome(event) {
         event.target.value = ''
         router.push('/')
-      },
-      toggleEditMode() {
-        app.$emit('toggle-edit-mode')
       },
     }
   }

@@ -2,6 +2,10 @@ function all() {
   return JSON.parse(localStorage.getItem('sites'))
 }
 
+function take(count) {
+  return all().slice(0, count);
+}
+
 function get(id) {
   let sites = this.all()
 
@@ -33,4 +37,4 @@ function clearCache() {
   localStorage.removeItem('sites')
 }
 
-export default { all, get, remove, cache, clearCache }
+export default { all, take, get, remove, cache, clearCache }

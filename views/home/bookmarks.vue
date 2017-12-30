@@ -1,15 +1,20 @@
 <template>
   <div class="bookmarks">
-    <div class="items-count">{{ sites.length }} 条标签</div>
-    <div class="list-group row" v-for="site in sites">
+    <div class="items-count">
+      {{ sites.length }} 个网站
+      <span @click="edit_mode = !edit_mode" class="edit-btn pull-right">
+        {{ edit_mode ? '完成编辑' : '编辑' }}
+      </span>
+    </div>
+    <div class="list-group row" v-for="(site, index) in sites" :key="site.id">
       <div class="list-group-item" :title="site.description">
         <img v-bind:src="'http://api.byi.pw/favicon/?url='+site.url" class="favicon">
         <a :href="site.url" target="_blank"><span class="title">{{ site.title }}</span></a>
         <a :href="site.url" target="_blank"><span class="url" :title="site.keywords">{{ site.url }}</span></a>
         <div class="menu-bar pull-right">
           <span v-show="!tag_id && !edit_mode" @click="gotoTag(site.tag_id)">{{ getTagName(site.tag_id) }}</span>
-          <router-link :to="'/site/'+site.id+'/edit'" class="glyphicon glyphicon-edit" v-show="edit_mode && !keywords" title="编辑"></router-link>
-          <span class="glyphicon glyphicon-trash" v-show="edit_mode  && !keywords" title="删除" @click.self="deleteSite(site.id)"></span>
+          <router-link :to="'/site/'+site.id+'/edit'" class="glyphicon glyphicon-edit" v-show="edit_mode" title="编辑"></router-link>
+          <span class="glyphicon glyphicon-trash" v-show="edit_mode" title="删除" @click.self="deleteSite(site.id, index)"></span>
         </div>
       </div>
     </div>
@@ -29,10 +34,10 @@
   export default {
     data() {
       return {
-        sites : Site.all(),
         keywords: null,
         edit_mode: false,
-        tag_id: null
+        tag_id: null,
+        sites: [],
       }
     },
     watch: {
@@ -46,19 +51,14 @@
       app.$on('tag-changed', this.getSitesByTag)
       app.$on('search', this.showSearchResult)
       app.$on('open-link', this.openLink)
-      app.$on('toggle-edit-mode', this.toggleEditMode)
     },
     computed: {
-      baiduLink: function () {
-        return 'https://www.baidu.com/s?wd=' + this.keywords
-      },
-      googleLink: function() {
-        return 'https://www.google.com.hk/#&q=' + this.keywords
-      }
+      baiduLink: () => 'https://www.baidu.com/s?wd=' + this.keywords,
+      googleLink: () => 'https://www.google.com.hk/#&q=' + this.keywords
     },
     methods: {
       init(tag_id) {
-        this.sites = tag_id == undefined ? Site.all() : Tag.sites(tag_id)
+        this.sites = tag_id == undefined ? Site.take(30) : Tag.sites(tag_id)
       },
       getAllSites() {
         app.$http.get('sites').then((response) => {
@@ -67,11 +67,15 @@
       },
       getSitesByTag(id) {
         this.keywords = false
-        this.sites = id == 'all' ? Site.all() : Tag.sites(id)
+        this.sites = id == 'all' ? Site.take(30) : Tag.sites(id)
       },
       showSearchResult(keywords) {
-        this.sites = Search.sites(keywords)
         this.keywords = keywords
+        if (keywords.length > 1) {
+          this.sites = Search.sites(keywords)
+        } else {
+          this.sites = Site.take(30)
+        }
       },
       getTagName(tag_id) {
         let tag = Tag.get(tag_id)
@@ -79,9 +83,6 @@
       },
       gotoTag(tag_id) {
         router.push('/tag/' + tag_id)
-      },
-      toggleEditMode() {
-        this.edit_mode = !this.edit_mode
       },
       openLink() {
         let first_result = this.sites[0]
@@ -91,19 +92,18 @@
           window.open(this.baiduLink);
         }
       },
-      deleteSite(id) {
+      deleteSite(id, index) {
         if(!confirm('确定删除？')) return;
-
-        this.$http.get('site/delete/' + id)
-
-        let site = Site.get(id)
-        let tag_id = site.tag_id
-        Site.remove(id)
-
-        if (Tag.sites(tag_id).length == 0) {
-          Tag.remove(tag_id)
-          app.$emit('reload-tags')
-        }
+        this.$http.get('site/delete/' + id).then(() => {
+          this.sites.splice(index, 1)
+          const site = Site.get(id)
+          const tag_id = site.tag_id
+          Site.remove(id)
+          if (Tag.sites(tag_id).length == 0) {
+            Tag.remove(tag_id)
+            app.$emit('reload-tags')
+          }
+        })
       }
     }
   }
@@ -121,6 +121,10 @@
       color: #6bbd7a;
       margin-bottom: 5px;
     }
+  }
+  .edit-btn {
+    color: #303133;
+    cursor: pointer;
   }
   .list-group {
     margin-bottom: 0;

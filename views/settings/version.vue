@@ -3,6 +3,11 @@
     <navigation></navigation>
     <nav-menu></nav-menu>
     <div class="setting-content">
+      <h4>v1.1</h4>
+      <ul>
+        <li>去掉顶部编辑按钮，将编辑功能分开</li>
+        <li>首页默认显示30条数据，防止数据过多浏览器加载慢</li>
+      </ul>
       <h4>v1.01</h4>
       <ul>
         <li>移动界面简单适配</li>
