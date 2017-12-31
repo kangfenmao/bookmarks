@@ -8,7 +8,7 @@
     </div>
     <div class="list-group row" v-for="(site, index) in sites" :key="site.id">
       <div class="list-group-item" :title="site.description">
-        <img v-bind:src="'http://api.byi.pw/favicon/?url='+site.url" class="favicon">
+        <img :src="url(site.url)" class="favicon">
         <a :href="site.url" target="_blank"><span class="title">{{ site.title }}</span></a>
         <a :href="site.url" target="_blank"><span class="url" :title="site.keywords">{{ site.url }}</span></a>
         <div class="menu-bar pull-right">
@@ -59,6 +59,9 @@
     methods: {
       init(tag_id) {
         this.sites = tag_id == undefined ? Site.take(30) : Tag.sites(tag_id)
+      },
+      url(value) {
+        return 'https://api.byi.pw/favicon/?url=' + (new URL(value)).hostname
       },
       getAllSites() {
         app.$http.get('sites').then((response) => {
