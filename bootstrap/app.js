@@ -14,7 +14,7 @@ Vue.use(VueResource)
 
 // configuration
 Vue.config.debug = true
-Vue.http.options.root = 'http://api.shuqian.pro'
+Vue.http.options.root = 'https://api.shuqian.pro'
 Vue.http.options.params = {'api_token' : localStorage.getItem('token')}
 
 // register components
