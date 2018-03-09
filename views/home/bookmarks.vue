@@ -61,7 +61,7 @@
         this.sites = tag_id == undefined ? Site.take(30) : Tag.sites(tag_id)
       },
       url(value) {
-        return 'https://api.byi.pw/favicon/?url=' + (new URL(value)).hostname
+        return 'https://api.statvoo.com/favicon/?url=' + value
       },
       getAllSites() {
         app.$http.get('sites').then((response) => {
